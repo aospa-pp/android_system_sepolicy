@@ -1,6 +1,7 @@
 # Properties used only in /system
 system_internal_prop(adb_timeout_prop)
 system_internal_prop(adbd_prop)
+system_internal_prop(adbd_private_prop)
 system_internal_prop(adbd_tradeinmode_prop)
 system_internal_prop(aiseal_prop)
 system_internal_prop(apexd_payload_metadata_prop)
