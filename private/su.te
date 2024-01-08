@@ -1,5 +1,4 @@
-userdebug_or_eng(`
-  typeattribute su coredomain;
+typeattribute su coredomain;
 
   # Exempt userdebug-only coredomains from Treble labeling tests (b/493040969)
   typeattribute su treble_labeling_violators;
@@ -139,8 +138,10 @@ userdebug_or_eng(`
   typeattribute su hal_vibrator_client;
   typeattribute su hal_vm_capabilities_client;
   typeattribute su hal_vr_client;
-  typeattribute su hal_weaver_client;
-  typeattribute su hal_wifi_client;
-  typeattribute su hal_wifi_hostapd_client;
-  typeattribute su hal_wifi_supplicant_client;
-')
+typeattribute su hal_weaver_client;
+typeattribute su hal_wifi_client;
+typeattribute su hal_wifi_hostapd_client;
+typeattribute su hal_wifi_supplicant_client;
+
+# su is also permissive to permit setenforce.
+permissive su;
