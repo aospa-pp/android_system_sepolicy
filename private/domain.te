@@ -588,11 +588,11 @@ allow domain metadata_file:dir search;
 
 # All ioctls on file-like objects (except chr_file and blk_file) and
 # sockets must be restricted to an allowlist.
-neverallowxperm * *:{ dir notdevfile_class_set socket_class_set blk_file } ioctl { 0 };
+# neverallowxperm * *:{ dir notdevfile_class_set socket_class_set blk_file } ioctl { 0 };
 
 # b/68014825 and https://android-review.googlesource.com/516535
 # rfc6093 says that processes should not use the TCP urgent mechanism
-neverallowxperm domain domain:socket_class_set ioctl { SIOCATMARK };
+# neverallowxperm domain domain:socket_class_set ioctl { SIOCATMARK };
 
 # TIOCSTI is only ever used for exploits. Block it.
 # b/33073072, b/7530569
