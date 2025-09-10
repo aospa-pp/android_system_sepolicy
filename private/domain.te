@@ -980,7 +980,7 @@ full_treble_only(`
   neverallow {
     coredomain
     -shell
-    userdebug_or_eng(`-su')
+    -su
     -ueventd # uevent is granted create for this device, but we still neverallow I/O below
   } vndbinder_device:chr_file rw_file_perms;
 ')
@@ -991,14 +991,14 @@ full_treble_only(`
   neverallow {
     coredomain
     -shell
-    userdebug_or_eng(`-su')
+    -su
   } vndservice_manager_type:service_manager *;
 ')
 full_treble_only(`
   neverallow {
     coredomain
     -shell
-    userdebug_or_eng(`-su')
+    -su
   } vndservicemanager:binder *;
 ')
 
@@ -1384,8 +1384,9 @@ neverallow {
 
 # Nobody should be able to execute su on user builds.
 # On userdebug/eng builds, only dumpstate, shell, and
-# su itself execute su.
-neverallow { domain userdebug_or_eng(`-dumpstate -shell -su -overlay_remounter') } su_exec:file no_x_file_perms;
+# su itself execute su. User builds with adb root enabled
+# also let shell and su execute it.
+neverallow { domain -dumpstate -shell -su -overlay_remounter } su_exec:file no_x_file_perms;
 
 # Do not allow the introduction of new execmod rules. Text relocations
 # and modification of executable pages are unsafe.
@@ -1480,7 +1481,7 @@ neverallow {
   -webview_zygote
   -zygote
 } {
-  appdomain -shell -simpleperf userdebug_or_eng(`-su') -tradeinmode -isolated_app
+  appdomain -shell -simpleperf -su -tradeinmode -isolated_app
 }:process { transition dyntransition };
 
 # Only domains spawned from zygote, runas, simpleperf_app_runner, and zygote_next may have
@@ -2191,7 +2192,7 @@ full_treble_only(`
     -netd # netdomain needs this
     -mdnsd # netdomain needs this
     -prng_seeder # Any process using libcrypto needs this
-    userdebug_or_eng(`-su') # communications with su are permitted only on userdebug or eng builds
+    -su # communications with su are permitted (adb root)
     -init
     -tombstoned # linker to tombstoned
     -heapprofd

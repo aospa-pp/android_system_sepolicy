@@ -868,9 +868,9 @@ neverallow appdomain system_server:udp_socket {
 # Exception for renderscript binaries (/system/bin/bcc, /system/bin/ld.mc)
 # to allow renderscript to create privileged executable files.
 # Exception for virtualizationmanager_domain to allow running VMs as child processes.
-neverallow { appdomain -shell userdebug_or_eng(`-su') }
+neverallow { appdomain -shell -su }
     { domain -appdomain -crash_dump -rs -virtualizationmanager_domain }:process { transition };
-neverallow { appdomain -shell userdebug_or_eng(`-su') }
+neverallow { appdomain -shell -su }
     { domain -appdomain }:process { dyntransition };
 
 # Don't allow regular apps access to storage configuration properties.
